@@ -1,5 +1,7 @@
 // declaração das variáveis
 var player = document.getElementById('player_image')
+var popup = document.getElementById('quadro-popup')
+var output = document.getElementById('output')
 var cards = {
     1: document.getElementById('card1'),
     2: document.getElementById('card2'),
@@ -10,11 +12,17 @@ var cards = {
 var playerSprites = [
     'assets/player_sprites/sprite1.png',
     'assets/player_sprites/sprite2.png',
-    'assets/player_sprites/sprite3.png'    
+    'assets/player_sprites/sprite3.png',
+    'assets/player_sprites/sprite1_inverso.png',
+    'assets/player_sprites/sprite2_inverso.png',
+    'assets/player_sprites/sprite3_inverso.png'    
 ]
 
+var popupHitbox = []
+
 var playerX = 1
-var playerY = 350
+var playerY = 370
+var playerSpeed = 2
 var cardX = 160
 var cardY = 80
 var cardGap = 30
@@ -23,6 +31,7 @@ var cardHeigth = 240
 var esquerda = false
 var direita = false
 var quadroAtual = 0
+var cardStartPosition = 90
 const QTD_CARDS = 5
 
 var playerFrame = 0;
@@ -36,13 +45,20 @@ var ctx = galeria.getContext('2d');
 galeria.width = window.innerWidth
 galeria.height = window.innerHeight * (80/100)
 
+for(let i = 0; i < QTD_CARDS; i++) {
+    popupHitbox.push([(cardStartPosition + 20), (cardStartPosition + 130)])
+    cardStartPosition += 220
+}
+
+console.log(popupHitbox[3])
+
 window.onload = main();
 
 // verifica se usuario apertou direcional direito/esquerdo
 document.addEventListener('keydown', function(event) {
-    console.log('Tecla pressionada:', event.key);
-    console.log('Código da tecla:', event.code); // Mais específico, como "KeyA", "Enter", etc.
-    console.log('Chave específica:', event.keyCode); // Código numérico (obsoleto, use event.code)
+    // console.log('Tecla pressionada:', event.key);
+    // console.log('Código da tecla:', event.code); // Mais específico, como "KeyA", "Enter", etc.
+    // console.log('Chave específica:', event.keyCode); // Código numérico (obsoleto, use event.code)
     if (event.key == 'ArrowLeft') {
         esquerda = true
     }
@@ -63,21 +79,23 @@ document.addEventListener('keyup', function(event) {
 // Função principal do jogo
 function gameLoop () {
     if(esquerda) {
-        andar(-2)
+        animacaoAndar(-playerSpeed)
+        andar(-playerSpeed)
     }
     if(direita) {
-        andar(2)
+        animacaoAndar(playerSpeed)
+        andar(playerSpeed)
+    }
+    if(!direita && !esquerda) {
+        animacaoAndar(0)
     }
 
-    frameTick++;
-    if (frameTick % frameSpeed === 0) {
-        playerFrame = (playerFrame + 1) % playerSprites.length;
-        player.src = playerSprites[playerFrame]
-    }
     console.log(playerFrame)
     console.log(playerSprites[playerFrame])
     printarCanvas()
     requestAnimationFrame(gameLoop)
+    printarPopUp(playerX)
+    output.innerHTML = playerX
 }
 // requestAnimationFrame executa continuamente de acordo com a taxa de atualizção (60 fps) substitui setInterval
 requestAnimationFrame(gameLoop)
@@ -107,6 +125,26 @@ function printarCards() {
         ctx.drawImage(card, cardX + (i - 1) * (cardWidth + cardGap), cardY, cardWidth, cardHeigth);
     }
 }
+
+function printarPopUp(playerPosition) {
+    // if (playerPosition >= 110 && playerPosition <= 220) {
+    //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
+    // }
+    // if (playerPosition >= 310 && playerPosition <= 440) {
+    //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
+    // }
+    // if (playerPosition >= 530 && playerPosition <= 660) {
+    //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
+    // }
+    // if (playerPosition >= 770 && playerPosition <= 880) {
+    //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
+    // }
+    // if (playerPosition >= 990 && playerPosition <= 1100) {
+    //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
+    // }
+
+}
+
 // função que movimenta o player
 function andar(sentido) {
     // direita
@@ -120,4 +158,41 @@ function andar(sentido) {
         console.log('>')
     }
 
+}
+
+function animacaoAndar(sentido) {
+    if (sentido > 0) {
+        frameTick++;
+        if (frameTick % frameSpeed == 0) {
+            playerFrame = (playerFrame + 1) % (playerSprites.length - 3);
+            player.src = playerSprites[playerFrame]
+        }
+    }
+    else if (sentido < 0) {
+        frameTick++;
+        if (frameTick % frameSpeed == 0) {
+            playerFrame = (playerFrame + 1) % (playerSprites.length - 3);
+            playerFrame += 3
+            player.src = playerSprites[playerFrame]
+        }
+    }
+
+    //esquerda
+    if (sentido == 0 && playerFrame >= 3) {
+        player.src = playerSprites[4]
+        playerFrame = 3
+    }
+
+    //direita
+    if (sentido == 0 && playerFrame < 3) {
+        player.src = playerSprites[1]
+        playerFrame = 1
+    }
+    
+    if (playerX <= 0){
+        player.src = playerSprites[4]
+    }
+    else if (playerX >= window.innerWidth - 100) {
+        player.src = playerSprites[1]
+    }
 }
