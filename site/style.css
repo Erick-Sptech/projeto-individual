@@ -6,8 +6,11 @@
     overflow-y: hidden;
     overflow-x: hidden;
 }
+body {
+    background-color: blue;
+}
 
 .main {
-    background-color: blue;
     display: flex;
+    background-color: white;
 }

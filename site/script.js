@@ -7,8 +7,14 @@ var cards = {
     4: document.getElementById('card4'),
     5: document.getElementById('card5')
 };
+var playerSprites = [
+    'assets/player_sprites/sprite1.png',
+    'assets/player_sprites/sprite2.png',
+    'assets/player_sprites/sprite3.png'    
+]
+
 var playerX = 1
-var playerY = 430
+var playerY = 350
 var cardX = 160
 var cardY = 80
 var cardGap = 30
@@ -16,7 +22,12 @@ var cardWidth = 190
 var cardHeigth = 240
 var esquerda = false
 var direita = false
+var quadroAtual = 0
 const QTD_CARDS = 5
+
+var playerFrame = 0;
+var frameSpeed = 10; // menor = mais rápido
+var frameTick = 0;
 
 // configuração do canvas
 var galeria = document.getElementById('galeria')
@@ -57,6 +68,14 @@ function gameLoop () {
     if(direita) {
         andar(2)
     }
+
+    frameTick++;
+    if (frameTick % frameSpeed === 0) {
+        playerFrame = (playerFrame + 1) % playerSprites.length;
+        player.src = playerSprites[playerFrame]
+    }
+    console.log(playerFrame)
+    console.log(playerSprites[playerFrame])
     printarCanvas()
     requestAnimationFrame(gameLoop)
 }
@@ -65,7 +84,7 @@ requestAnimationFrame(gameLoop)
 
 function main() {
     ctx.clearRect(0, 0, 100, 100)
-    ctx.drawImage(player, playerX , playerY, 80, 80)
+    ctx.drawImage(player, playerX , playerY, 140, 140)
 
 }
 
@@ -76,7 +95,7 @@ function log() {
 // função que printa o canvas atualizado
 function printarCanvas() {
     ctx.clearRect(0, 0, galeria.width, galeria.height)
-    ctx.drawImage(player, playerX, playerY, 80, 80)
+    ctx.drawImage(player, playerX, playerY, 200, 200);
     printarCards()
 }
 
@@ -100,5 +119,5 @@ function andar(sentido) {
         playerX += sentido
         console.log('>')
     }
-    ctx.drawImage(player, playerX , playerY, 80, 80)
+
 }
