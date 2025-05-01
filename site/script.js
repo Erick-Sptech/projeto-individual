@@ -130,9 +130,8 @@ function printarCanvas() {
 function printarCards() {
     console.log('A')
     for (var i = 1; i <= QTD_CARDS; i++) {
-        let card = cards[i];
-        card.src = `assets/card_image1.png`
-        ctx.drawImage(card, cardX + (i - 1) * (cardWidth + cardGap), cardY, cardWidth, cardHeigth);
+        cards[i].src = `assets/card_image1.png`
+        ctx.drawImage(cards[i], cardX + (i - 1) * (cardWidth + cardGap), cardY, cardWidth, cardHeigth);
     }
 }
 
@@ -174,6 +173,7 @@ function printarPopup() {
         }
         else {
             gamePause = true
+            popup.innerHTML = `<img src="${cards[cardAtual + 1].src}" style="width: 100%; height: 100%">`
             popup.style.display = 'block'
             escurece.style.display = 'block'
         }
