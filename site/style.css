@@ -6,6 +6,9 @@
     overflow-y: hidden;
     overflow-x: hidden;
 }
+:root {
+    --popup_width: 500px;
+}
 body {
     background-color: blue;
 }
@@ -13,4 +16,22 @@ body {
 .main {
     display: flex;
     background-color: white;
+}
+
+.popup_card {
+    position: absolute;
+    display: none;
+    background-color: green;
+    width: var(--popup_width);
+    height: 500px;
+    left: calc(50% - (var(--popup_width) / 2));
+}
+
+#inative-game {
+    background-color: black;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 40%;
 }

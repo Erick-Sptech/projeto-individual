@@ -1,7 +1,9 @@
 // declaração das variáveis
 var player = document.getElementById('player_image')
-var popup = document.getElementById('quadro-popup')
+var arrow = document.getElementById('quadro-arrow')
 var output = document.getElementById('output')
+var popup = document.getElementById('popup')
+var escurece = document.getElementById('inative-game')
 var cards = {
     1: document.getElementById('card1'),
     2: document.getElementById('card2'),
@@ -18,7 +20,7 @@ var playerSprites = [
     'assets/player_sprites/sprite3_inverso.png'    
 ]
 
-var popupHitbox = []
+var arrowHitbox = []
 
 var playerX = 1
 var playerY = 370
@@ -28,14 +30,16 @@ var cardY = 80
 var cardGap = 30
 var cardWidth = 190
 var cardHeigth = 240
+var gamePause = false
 var esquerda = false
 var direita = false
+var cardAtual = 0
 var quadroAtual = 0
 var cardStartPosition = 90
 const QTD_CARDS = 5
 
 var playerFrame = 0;
-var frameSpeed = 10; // menor = mais rápido
+var frameSpeed = 9; // menor = mais rápido
 var frameTick = 0;
 
 // configuração do canvas
@@ -46,17 +50,17 @@ galeria.width = window.innerWidth
 galeria.height = window.innerHeight * (80/100)
 
 for(let i = 0; i < QTD_CARDS; i++) {
-    popupHitbox.push([(cardStartPosition + 20), (cardStartPosition + 130)])
+    arrowHitbox.push([(cardStartPosition + 20), (cardStartPosition + 130)])
     cardStartPosition += 220
 }
 
-console.log(popupHitbox[3])
+console.log(arrowHitbox[3])
 
 window.onload = main();
 
 // verifica se usuario apertou direcional direito/esquerdo
 document.addEventListener('keydown', function(event) {
-    // console.log('Tecla pressionada:', event.key);
+    console.log('Tecla pressionada:', event.key);
     // console.log('Código da tecla:', event.code); // Mais específico, como "KeyA", "Enter", etc.
     // console.log('Chave específica:', event.keyCode); // Código numérico (obsoleto, use event.code)
     if (event.key == 'ArrowLeft') {
@@ -64,6 +68,9 @@ document.addEventListener('keydown', function(event) {
     }
     if (event.key == 'ArrowRight') {
         direita = true
+    }
+    if (event.key == 'Enter') {
+        printarPopup()
     }
 });
 
@@ -78,24 +85,27 @@ document.addEventListener('keyup', function(event) {
 
 // Função principal do jogo
 function gameLoop () {
-    if(esquerda) {
-        animacaoAndar(-playerSpeed)
-        andar(-playerSpeed)
+    if (!gamePause) {
+        if(esquerda) {
+            animacaoAndar(-playerSpeed)
+            andar(-playerSpeed)
+        }
+        if(direita) {
+            animacaoAndar(playerSpeed)
+            andar(playerSpeed)
+        }
+        if(!direita && !esquerda) {
+            animacaoAndar(0)
+        }
+    
+        console.log(playerFrame)
+        console.log(playerSprites[playerFrame])
+        console.log(cardAtual)
+        printarCanvas()
+        requestAnimationFrame(gameLoop)
+        printarArrow(playerX)
+        output.innerHTML = playerX
     }
-    if(direita) {
-        animacaoAndar(playerSpeed)
-        andar(playerSpeed)
-    }
-    if(!direita && !esquerda) {
-        animacaoAndar(0)
-    }
-
-    console.log(playerFrame)
-    console.log(playerSprites[playerFrame])
-    printarCanvas()
-    requestAnimationFrame(gameLoop)
-    printarPopUp(playerX)
-    output.innerHTML = playerX
 }
 // requestAnimationFrame executa continuamente de acordo com a taxa de atualizção (60 fps) substitui setInterval
 requestAnimationFrame(gameLoop)
@@ -126,7 +136,7 @@ function printarCards() {
     }
 }
 
-function printarPopUp(playerPosition) {
+function printarArrow(playerPosition) {
     // if (playerPosition >= 110 && playerPosition <= 220) {
     //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
     // }
@@ -142,7 +152,33 @@ function printarPopUp(playerPosition) {
     // if (playerPosition >= 990 && playerPosition <= 1100) {
     //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
     // }
+    for(var i = 0; i < QTD_CARDS; i ++) {
+        if (playerPosition >= arrowHitbox[i][0] && playerPosition <= arrowHitbox[i][1]) {
+            ctx.drawImage(arrow, playerX + 78, playerY, 40, 40)
+            cardAtual = i
+        }
+        else if (playerPosition < arrowHitbox[0][0] || playerPosition > arrowHitbox[4][1]){
+             cardAtual = -1
+        }
+    }
+}
 
+function printarPopup() {
+    if (cardAtual >= 0) {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        if (gamePause) {
+            gamePause = false
+            gameLoop()
+            popup.style.display = 'none'
+            escurece.style.display = 'none'
+        }
+        else {
+            gamePause = true
+            popup.style.display = 'block'
+            escurece.style.display = 'block'
+        }
+        console.log(gamePause)
+    }
 }
 
 // função que movimenta o player
