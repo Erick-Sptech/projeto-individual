@@ -3,6 +3,7 @@ var player = document.getElementById('player_image')
 var arrow = document.getElementById('quadro-arrow')
 var output = document.getElementById('output')
 var popup = document.getElementById('popup')
+var popup_image = document.getElementById('popup_image')
 var escurece = document.getElementById('inative-game')
 var cards = {
     1: document.getElementById('card1'),
@@ -155,8 +156,9 @@ function printarArrow(playerPosition) {
         if (playerPosition >= arrowHitbox[i][0] && playerPosition <= arrowHitbox[i][1]) {
             ctx.drawImage(arrow, playerX + 78, playerY, 40, 40)
             cardAtual = i
+            break
         }
-        else if (playerPosition < arrowHitbox[0][0] || playerPosition > arrowHitbox[4][1]){
+        else{
              cardAtual = -1
         }
     }
@@ -173,7 +175,7 @@ function printarPopup() {
         }
         else {
             gamePause = true
-            popup.innerHTML = `<img src="${cards[cardAtual + 1].src}" style="width: 100%; height: 100%">`
+            popup_image.innerHTML = `<img src="${cards[cardAtual + 1].src}" style="width: 100%; height: 100%">`
             popup.style.display = 'block'
             escurece.style.display = 'block'
         }
