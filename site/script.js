@@ -24,7 +24,7 @@ var playerSprites = [
 var arrowHitbox = []
 
 var playerX = 1
-var playerY = 370
+var playerY = 406
 var playerSpeed = 2
 var cardX = 160
 var cardY = 80
@@ -73,6 +73,9 @@ document.addEventListener('keydown', function(event) {
     if (event.key == 'Enter') {
         printarPopup()
     }
+    if (event.key == 'Escape') {
+        window.location.href = 'index.html'
+    }
 });
 
 document.addEventListener('keyup', function(event) {
@@ -113,7 +116,7 @@ requestAnimationFrame(gameLoop)
 
 function main() {
     ctx.clearRect(0, 0, 100, 100)
-    ctx.drawImage(player, playerX , playerY, 140, 140)
+    ctx.drawImage(player, playerX , playerY, 70, 140)
 
 }
 
@@ -124,14 +127,14 @@ function log() {
 // função que printa o canvas atualizado
 function printarCanvas() {
     ctx.clearRect(0, 0, galeria.width, galeria.height)
-    ctx.drawImage(player, playerX, playerY, 200, 200);
+    ctx.drawImage(player, playerX, playerY, 50, 100);
     printarCards()
 }
 
 function printarCards() {
     console.log('A')
     for (var i = 1; i <= QTD_CARDS; i++) {
-        cards[i].src = `assets/card_image1.png`
+        cards[i].src = `assets/card_images/card_ex.png`
         ctx.drawImage(cards[i], cardX + (i - 1) * (cardWidth + cardGap), cardY, cardWidth, cardHeigth);
     }
 }
@@ -153,8 +156,8 @@ function printarArrow(playerPosition) {
     //     ctx.drawImage(popup, playerX + 78, playerY, 40, 40)
     // }
     for(var i = 0; i < QTD_CARDS; i ++) {
-        if (playerPosition >= arrowHitbox[i][0] && playerPosition <= arrowHitbox[i][1]) {
-            ctx.drawImage(arrow, playerX + 78, playerY, 40, 40)
+        if (playerPosition - 73 >= arrowHitbox[i][0] && playerPosition - 73 <= arrowHitbox[i][1]) {
+            ctx.drawImage(arrow, playerX + 5, playerY - 45, 40, 40)
             cardAtual = i
             break
         }
@@ -175,12 +178,16 @@ function printarPopup() {
         }
         else {
             gamePause = true
-            popup_image.innerHTML = `<img src="${cards[cardAtual + 1].src}" style="width: 100%; height: 100%">`
-            popup.style.display = 'block'
-            escurece.style.display = 'block'
+            popup_image.innerHTML = `<img src="assets/card_images/card_image${cardAtual + 1}.png" style="width: 100%; height: 100%">`
+            popup.style.display = 'flex'
+            escurece.style.display = 'flex'
         }
         console.log(gamePause)
     }
+}
+function closePopup() {
+    gamePause = true
+    printarPopup()
 }
 
 // função que movimenta o player
