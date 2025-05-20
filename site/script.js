@@ -5,13 +5,7 @@ var output = document.getElementById('output')
 var popup = document.getElementById('popup')
 var popup_image = document.getElementById('popup_image')
 var escurece = document.getElementById('inative-game')
-var cards = {
-    1: document.getElementById('card1'),
-    2: document.getElementById('card2'),
-    3: document.getElementById('card3'),
-    4: document.getElementById('card4'),
-    5: document.getElementById('card5')
-};
+var cards = {};
 var playerSprites = [
     'assets/player_sprites/sprite1.png',
     'assets/player_sprites/sprite2.png',
@@ -25,6 +19,8 @@ var arrowHitbox = []
 
 var playerX = 1
 var playerY = 406
+var playerWidth = 50
+var playerHeigth = 100
 var playerSpeed = 2
 var cardX = 160
 var cardY = 80
@@ -37,7 +33,8 @@ var direita = false
 var cardAtual = 0
 var quadroAtual = 0
 var cardStartPosition = 90
-const QTD_CARDS = 5
+var QTD_CARDS = 7
+const FACULDADE = true
 
 var playerFrame = 0;
 var frameSpeed = 9; // menor = mais rápido
@@ -46,6 +43,22 @@ var frameTick = 0;
 // configuração do canvas
 var galeria = document.getElementById('galeria')
 var ctx = galeria.getContext('2d');
+
+if (FACULDADE) {
+    galeria.style.zoom = 1.1
+    playerWidth = 75
+    playerHeigth = 150
+    playerY = 545
+    frameSpeed = 17
+
+    cardY = 140
+}
+
+for(var i = 1; i <= QTD_CARDS; i++) {
+    itens_galeria.innerHTML += `<img src="" id="card${i}">`
+    cards[i] = document.getElementById(`card${i}`)
+}
+console.log(cards)
 
 galeria.width = window.innerWidth
 galeria.height = window.innerHeight * (80/100)
@@ -127,7 +140,7 @@ function log() {
 // função que printa o canvas atualizado
 function printarCanvas() {
     ctx.clearRect(0, 0, galeria.width, galeria.height)
-    ctx.drawImage(player, playerX, playerY, 50, 100);
+    ctx.drawImage(player, playerX, playerY, playerWidth, playerHeigth);
     printarCards()
 }
 
