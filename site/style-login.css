@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    max-width: 100vw;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+}
+
+:root {
+    --dark-green: #194954;
+}
+
+/* TELA DE LOGIN */
+
+.login-cabecalho {
+    background-color: white;
+    width: 100%;
+    height: 8vh;
+}
+
+.login-content {
+    width: 80vw;
+    height: 70vh;
+    margin-top: 4%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 300px;
+}
+
+.login-container {
+    width: 100%;
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    background-color: #ebebeb;
+}
+
+.login-left-side {
+    display: flex;
+    background-color: var(--dark-green);
+    height: 100%;
+    width: 40%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    border-radius: 30px 0 0 30px;
+}
+
+.login-left-side h1 {
+    font-size: 3.0rem;
+    color: white;
+}
+
+.login-left-side p {
+    font-size: 1.7rem;
+    text-align: center;
+    color: white;
+}
+
+.login-left-side button {
+    width: 40%;
+    height: 10%;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 30px;
+    font-size: 1.6rem;
+    color: white;
+}
+
+.login-right-side {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    border-radius: 0 30px 30px 0;
+}
+
+.login-right-side input {
+    width: 70%;
+    height: 45px;
+    padding-left: 5%;
+    border: 0;
+    background-color: #ebebeb;
+}
+
+.login-right-side input::placeholder {
+    font-size: 1.3rem;
+}
+
+.login-right-side h1 {
+    font-size: 2.5rem;
+    color: var(--dark-green);
+}
+
+.login-right-side button {
+    width: 25%;
+    height: 10%;
+    background-color: var(--dark-green);
+    border: 2px solid white;
+    border-radius: 35px;
+    font-size: 1.6rem;
+    color: white;
+}
