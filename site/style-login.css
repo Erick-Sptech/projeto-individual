@@ -64,14 +64,18 @@ body {
     color: white;
 }
 
-.login-left-side button {
-    width: 40%;
-    height: 10%;
+.login-left-side a {
+    width: 30%;
+    height: 9%;
     background-color: transparent;
     border: 2px solid white;
     border-radius: 30px;
     font-size: 1.6rem;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "DM Sans", sans-serif;
 }
 
 .login-right-side {
