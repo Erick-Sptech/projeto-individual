@@ -33,7 +33,7 @@ var direita = false
 var cardAtual = 0
 var quadroAtual = 0
 var cardStartPosition = 90
-var QTD_CARDS = 7
+var QTD_CARDS = 5
 const FACULDADE = true
 
 var playerFrame = 0;
@@ -75,8 +75,6 @@ window.onload = main();
 // verifica se usuario apertou direcional direito/esquerdo
 document.addEventListener('keydown', function(event) {
     console.log('Tecla pressionada:', event.key);
-    // console.log('Código da tecla:', event.code); // Mais específico, como "KeyA", "Enter", etc.
-    // console.log('Chave específica:', event.keyCode); // Código numérico (obsoleto, use event.code)
     if (event.key == 'ArrowLeft') {
         esquerda = true
     }
