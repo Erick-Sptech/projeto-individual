@@ -39,18 +39,66 @@ h1 {
     width: 100%;
     height: 90vh;
 }
-
 .side-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
     background-color: var(--green-light-theme);
     width: 10vw;
     height: 90vh;
+    z-index: 999;
+    opacity: 100% !important;
+}
+
+.side-bar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 110px;
+    height: 110px;
+    border: 5px  solid transparent;
+}
+
+.side-bar a:hover {
+    border-bottom: 5px solid white;
+}
+
+.tela-ativa {
+    border-bottom: 5px solid white !important;
 }
 
 .main-content {
     width: 90vw;
+}
+
+.main-content a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35vw;
+    height: 15vh;
+    margin-top: 50px;
+    transition: all 0.3s ease;
+    background-color: var(--dark-green);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    box-shadow:
+        0 0 10px var(--green-light-theme),
+        0 0 20px var(--green-light-theme),
+        0 0 30px var(--green-light-theme),
+        0 0 40px var(--green-light-theme);
+}
+
+.main-content a:hover {
+    background-color: transparent;
+    color: var(--dark-green);
+    border: 10px solid var(--dark-green);
+    font-weight: 900;
 }
 
 .kpi-container {
@@ -87,6 +135,9 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url(assets/painel-background-opacity.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #galeria-select h1 {
