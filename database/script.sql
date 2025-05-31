@@ -32,3 +32,16 @@ create table comentario (
     constraint id_quadro foreign key (id_quadro) references quadro (idquadro),
     constraint id_usuario foreign key (id_usuario) references usuario (idusuario)
 );
+
+create user galeriaUser identified by '1234';
+
+grant all privileges on galeria.* to 'galeriaUser'@'%';
+
+insert into usuario (nome, email, senha) values ('Erick', 'erick@gmail.com', '1234');
+insert into quadro (nome) values ('quadro1');
+
+insert into avaliacao (avaliacao, fkquadro, fkusuario) values (1, 1, 1);
+
+select * from avaliacao;
+
+select * from usuario;
