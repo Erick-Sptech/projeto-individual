@@ -21,12 +21,53 @@
             </div>
             <div class="login-right-side">
                 <h1>Crie sua conta</h1>
-                <input type="text" placeholder="Nome do usuário" class="login">
-                <input type="text" placeholder="Email" class="login">
-                <input type="text" placeholder="Senha" class="login">
-                <button>Cadastre-se</button>
+                <input id="ipt_nome" type="text" placeholder="Nome do usuário" class="login">
+                <input id="ipt_email" type="text" placeholder="Email" class="login">
+                <input id="ipt_senha" type="text" placeholder="Senha" class="login">
+                <button onclick="cadastrar()">Cadastre-se</button>
             </div>
         </div>
     </section>
 </body>
+
+<script>
+    function cadastrar() {
+        var nomeDigitado = ipt_nome.value
+        var emailDigitado = ipt_email.value
+        var senhaDigitado = ipt_senha.value
+
+        console.log(nomeDigitado, emailDigitado, senhaDigitado);
+
+        if (nomeDigitado == "" || emailDigitado == "" || senhaDigitado == "") {
+            alert('Preencha os campos')
+            return false
+        }
+        
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nomeDigitado,
+                emailServer: emailDigitado,
+                senhaServer: senhaDigitado
+            }),
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta)
+
+            if(resposta.ok) {
+                alert('usuario cadastrado')
+            }
+            else {
+                alert("Erro ao cadastrar")
+            }
+        }).catch(function (resposta) {
+            console.log("Erro: ", resposta);
+        })
+
+        return false
+    }
+</script>
+
 </html>

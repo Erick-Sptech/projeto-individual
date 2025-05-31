@@ -21,11 +21,47 @@
             </div>
             <div class="login-right-side">
                 <h1>Faça Login</h1>
-                <input type="text" placeholder="Nome do usuário" class="login">
-                <input type="text" placeholder="Senha" class="login">
-                <button>Entrar</button>
+                <input id="ipt_nome" type="text" placeholder="Nome do usuário" class="login">
+                <input id="ipt_senha" type="text" placeholder="Senha" class="login">
+                <button onclick="autenticar()">Entrar</button>
             </div>
         </div>
     </section>
 </body>
+
+<script>
+    function autenticar() {
+        var nomeDigitado = ipt_nome.value
+        var senhaDigitado = ipt_senha.value
+
+        if(nomeDigitado == "" || senhaDigitado == "") {
+            alert('Preencha os campos')
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "GET"
+        }).then(function(resposta) {
+            if(resposta.ok) {
+                return resposta.json()
+            }
+            else {
+                alert("Erro ao fazer Login")
+            }
+        }).then(function(dados) {
+            console.log("Usuarios: ", dados)
+
+            dados.forEach(usuario => {
+                console.log("Usuário: ", usuario.nome);
+
+                if (nomeDigitado == usuario.nome && senhaDigitado == usuario.senha) {
+                    alert('Login realizado')
+                    window.location = 'dashboard.html'
+                }
+            })
+        }).catch(function(erro) {
+            console.log("Erro: ", erro);
+        })
+    }
+</script>
+
 </html>
