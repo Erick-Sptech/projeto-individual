@@ -24,10 +24,10 @@
                 <span class="close_button" onclick="closePopup()">&times;</span>
             </div>
             <div id="avaliacao_inputs">
-                <img class="avaliacao_icons" src="assets/like.png">
-                <img class="avaliacao_icons" src="assets/deslike.png">
-                <input class="avaliacao_text_input" placeholder="Digite sua avaliação..." type="text">
-                <img class="avaliacao_submit" src="assets/seta.png">    
+                <img onclick="enviarAvaliacao(1)" class="avaliacao_icons" src="assets/like.png">
+                <img onclick="enviarAvaliacao(0)" class="avaliacao_icons" src="assets/deslike.png">
+                <input id="ipt_comentario" class="avaliacao_text_input" placeholder="Digite sua avaliação..." type="text">
+                <img onclick="enviarComentario()" class="avaliacao_submit" src="assets/seta.png">    
             </div>
         </div>
     </div>

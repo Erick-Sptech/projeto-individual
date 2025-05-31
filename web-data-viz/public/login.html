@@ -54,6 +54,9 @@
                 console.log("Usuário: ", usuario.nome);
 
                 if (nomeDigitado == usuario.nome && senhaDigitado == usuario.senha) {
+                    localStorage.setItem('usuario', usuario.nome);
+                    localStorage.setItem('senha', usuario.senha);
+                    localStorage.setItem('id', usuario.idusuario);
                     alert('Login realizado')
                     window.location = 'dashboard.html'
                 }
