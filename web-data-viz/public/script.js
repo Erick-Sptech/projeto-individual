@@ -103,9 +103,10 @@ function iniciarJogo() {
         }
         if (event.key == 'Enter') {
             printarPopup()
+            somarVisita()
         }
         if (event.key == 'Escape') {
-            window.location.href = 'index.html'
+            window.location.href = 'dashboard.html'
         }
     });
 
@@ -208,9 +209,9 @@ function iniciarJogo() {
                     dados.forEach(comentario => {
                         comentarios_container.innerHTML += `
                             <div class="comentarios-item">
-                                <p>${comentario.nome}</p>
+                                <strong><p>${comentario.nome}</p></strong>
                                 <p>${comentario.conteudo}</p>
-                                <p>${comentario.data_comentario}</p>
+                                <p style="text-align: right; width: 95%; color: #0037ff; font-weight: 900;">${new Date(comentario.data_comentario).toLocaleDateString('pt-BR')} ${new Date(comentario.data_comentario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p>
                             </div>
                         `
                     });
@@ -310,12 +311,12 @@ async function enviarComentario() {
             buscarComentarios().then(function(resposta){
                 resposta.forEach(comentario => {
                     comentarios_container.innerHTML += `
-                        <div class="comentarios-item">
-                        <p>${comentario.nome}</p>
-                        <p>${comentario.conteudo}</p>
-                        <p>${comentario.data_comentario}</p>
-                        </div>
-                    `
+                            <div class="comentarios-item">
+                                <strong><p>${comentario.nome}</p></strong>
+                                <p>${comentario.conteudo}</p>
+                                <p style="text-align: right; width: 95%; color: #0037ff; font-weight: 900;">${new Date(comentario.data_comentario).toLocaleDateString('pt-BR')} ${new Date(comentario.data_comentario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p>
+                            </div>
+                        `
                 });
             })
         })
@@ -356,6 +357,20 @@ function buscarComentarios() {
         console.error("ERRO: ", erro)
         throw erro
     })
+}
+
+function somarVisita() {
+    if(gamePause) {
+        fetch("/quadros/somarVisita", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_quadroServer: cardAtual + 1
+            })
+        })
+    }
 }
 
 carregarQuadros()

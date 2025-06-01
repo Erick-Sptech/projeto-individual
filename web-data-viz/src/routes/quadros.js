@@ -19,4 +19,8 @@ router.post("/buscarComentarios", function (req, res) {
     quadroController.buscarComentarios(req, res);
 });
 
+router.post("/somarVisita", function (req, res) {
+    quadroController.somarVisita(req, res);
+})
+
 module.exports = router;

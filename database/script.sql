@@ -10,7 +10,10 @@ create table usuario (
 
 create table quadro (
 	idquadro int primary key auto_increment,
-    nome varchar(45)
+    nome varchar(45),
+    visitas int default 0,
+    caminhoImagemQuadro varchar(50),
+    caminhoImagem varchar(50)
 );
 
 create table avaliacao (
@@ -33,15 +36,26 @@ create table comentario (
     constraint id_usuario foreign key (id_usuario) references usuario (idusuario)
 );
 
+-- drop user galeriaUser;
+-- drop database galeria;
+
 create user galeriaUser identified by '1234';
 
 grant all privileges on galeria.* to 'galeriaUser'@'%';
 
 insert into usuario (nome, email, senha) values ('Erick', 'erick@gmail.com', '1234');
-insert into quadro (nome) values ('quadro1');
 
-insert into avaliacao (avaliacao, fkquadro, fkusuario) values (1, 1, 1);
+insert into quadro (nome, caminhoImagem, caminhoImagemQuadro) values
+	('quadro1', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
+    ('quadro2', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
+    ('quadro3', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
+    ('quadro4', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
+    ('quadro5', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png')
+;
 
 select * from avaliacao;
-
+select * from quadro;
 select * from usuario;
+select u.nome, c.conteudo, c.data_comentario from comentario c inner join usuario u on c.id_usuario = u.idusuario where id_quadro = 1 order by data_comentario desc, idcomentario desc limit 10;
+
+update quadro set visitas = visitas + 1 where idquadro = 1;

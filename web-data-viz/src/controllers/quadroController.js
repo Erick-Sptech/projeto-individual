@@ -79,9 +79,32 @@ function buscarComentarios(req, res) {
     }
 }
 
+function somarVisita(req, res) {
+    var id_quadro = req.body.id_quadroServer
+
+    if (id_quadro == undefined) {
+        res.status(400).send('Os dados não chegaram corretamente')
+        console.log('id_quadro: ', id_quadro);   
+    }
+    else {
+        quadroModel.somarVisita(id_quadro)
+        .then(
+            function (resultado) {
+                res.json(resultado)
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+    }
+}
+
 module.exports = {
     listar,
     enviarComentario,
     enviarAvaliacao,
-    buscarComentarios
+    buscarComentarios,
+    somarVisita
 }
