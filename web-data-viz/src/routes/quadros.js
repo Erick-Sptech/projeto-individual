@@ -15,4 +15,8 @@ router.post("/enviarAvaliacao", function (req, res) {
     quadroController.enviarAvaliacao(req, res);
 });
 
+router.post("/buscarComentarios", function (req, res) {
+    quadroController.buscarComentarios(req, res);
+});
+
 module.exports = router;

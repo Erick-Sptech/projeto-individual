@@ -46,10 +46,10 @@ async function carregarQuadros() {
     const resposta = await fetch('/quadros/listar');
     if (!resposta.ok) throw new Error('Erro ao buscar quadros');
 
-    dadosCarregados = await resposta.json(); // Armazena os dados globalmente
+    dadosCarregados = await resposta.json(); // DADOS DOS QUADRO AQUI
     console.log('Dados carregados:', dadosCarregados);
 
-    iniciarJogo(); // Só começa o jogo após dados carregarem
+    iniciarJogo();
   } catch (erro) {
     console.error("Erro ao buscar quadros:", erro);
   }
@@ -198,28 +198,42 @@ function iniciarJogo() {
         }
     }
 
-    function printarPopup() {
+    async function printarPopup() {
+        comentarios_container.innerHTML = ''
         if (cardAtual >= 0) {
-            console.log("O card clicado foi: ", cardAtual)
-            
-            if (gamePause) {
-                gamePause = false
-                gameLoop()
-                popup.style.display = 'none'
-                escurece.style.display = 'none'
+            try {
+                console.log("O card clicado foi: ", cardAtual)
+                const dados = await buscarComentarios()
+
+                    dados.forEach(comentario => {
+                        comentarios_container.innerHTML += `
+                            <div class="comentarios-item">
+                                <p>${comentario.nome}</p>
+                                <p>${comentario.conteudo}</p>
+                                <p>${comentario.data_comentario}</p>
+                            </div>
+                        `
+                    });
+                
+                if (gamePause) {
+                    gamePause = false
+                    gameLoop()
+                    popup.style.display = 'none'
+                    escurece.style.display = 'none'
+                }
+                else {
+                    gamePause = true
+                    popup_image.innerHTML = `<img src="${dadosCarregados[cardAtual].caminhoImagem}" style="width: 100%; height: 100%">`
+                    popup.style.display = 'flex'
+                    escurece.style.display = 'flex'
+                }
+                console.log(gamePause)
             }
-            else {
-                gamePause = true
-                popup_image.innerHTML = `<img src="${dadosCarregados[cardAtual].caminhoImagem}" style="width: 100%; height: 100%">`
-                popup.style.display = 'flex'
-                escurece.style.display = 'flex'
+            catch (erro) {
+                console.log("ERRO :", erro);
+                
             }
-            console.log(gamePause)
         }
-    }
-    function closePopup() {
-        gamePause = true
-        printarPopup()
     }
 
     // função que movimenta o player
@@ -275,20 +289,40 @@ function iniciarJogo() {
     }
 }
 
-function enviarComentario() {
+
+async function enviarComentario() {
     var comentarioDigitado = ipt_comentario.value
 
-    fetch("/quadros/enviarComentario", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            conteudoServer: comentarioDigitado,
-            id_quadroServer: cardAtual + 1,
-            id_usuarioServer: localStorage.getItem('id')
+    try {
+        await fetch("/quadros/enviarComentario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                conteudoServer: comentarioDigitado,
+                id_quadroServer: cardAtual + 1,
+                id_usuarioServer: localStorage.getItem('id')
+            })
+        }).then(function() {
+            comentarios_container.innerHTML = ''
+
+            buscarComentarios().then(function(resposta){
+                resposta.forEach(comentario => {
+                    comentarios_container.innerHTML += `
+                        <div class="comentarios-item">
+                        <p>${comentario.nome}</p>
+                        <p>${comentario.conteudo}</p>
+                        <p>${comentario.data_comentario}</p>
+                        </div>
+                    `
+                });
+            })
         })
-    })
+    }
+    catch (erro) {
+        console.error("Error: ", erro);
+    }
 }
 
 function enviarAvaliacao(avaliacao) {
@@ -302,6 +336,25 @@ function enviarAvaliacao(avaliacao) {
             id_quadroServer: cardAtual + 1,
             id_usuarioServer: localStorage.getItem('id')
         })
+    })
+}
+
+function buscarComentarios() {
+    return fetch("/quadros/buscarComentarios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id_quadroServer: cardAtual + 1
+        })
+    }).then(function(resposta) {
+        return resposta.json()
+    }).then(function(dados) {
+        return dados
+    }).catch(function(erro) {
+        console.error("ERRO: ", erro)
+        throw erro
     })
 }
 
