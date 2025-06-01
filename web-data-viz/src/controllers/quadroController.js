@@ -73,7 +73,7 @@ function buscarComentarios(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro.sqlMessage);
-                res.status(500).json(erro.sqlmessage);
+                res.status(500).json(erro.sqlMessage);
             }
         )
     }
@@ -101,10 +101,40 @@ function somarVisita(req, res) {
     }
 }
 
+function buscarDadosKpiQuadros(req, res) {
+    quadroModel.buscarDadosKpiQuadros().then(function (resultado) {
+        res.status(200).json(resultado)
+    }).catch(function(erro) {
+        console.log("Erro Controller: ", erro);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+function buscarUsuarioComentario(req, res) {
+    quadroModel.buscarUsuarioComentario().then(function (resultado) {
+        res.status(200).json(resultado)
+    }).catch(function(erro) {
+        console.log("Erro Controller: ", erro);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+function buscarUltimoComentario(req, res) {
+    quadroModel.buscarUltimoComentario().then(function(resultado) {
+        res.status(200).json(resultado)
+    }).catch(function(erro){
+        console.log("Erro Controller: ", erro);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
 module.exports = {
     listar,
     enviarComentario,
     enviarAvaliacao,
     buscarComentarios,
-    somarVisita
+    somarVisita,
+    buscarDadosKpiQuadros,
+    buscarUsuarioComentario,
+    buscarUltimoComentario
 }

@@ -48,10 +48,44 @@ function somarVisita(id_quadro) {
     return database.executar(instrucaoSql);
 }
 
+function buscarDadosKpiQuadros() {
+    console.log("ACESSEI O QUADRO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n")
+    var instrucaoSql = `
+        select q.nome, 
+        (select count(*) from avaliacao a where a.fkquadro = q.idquadro and avaliacao = 1) as qtd_likes,
+        (select count(*) from comentario c where c.id_quadro = q.idquadro) as qtd_comentarios,
+        visitas
+        from quadro q;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
+function buscarUsuarioComentario() {
+    console.log("ACESSEI O QUADRO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n")
+    var instrucaoSql = `
+        SELECT u.nome FROM usuario u INNER JOIN comentario c ON c.id_usuario = u.idusuario GROUP BY u.nome ORDER BY count(*) LIMIT 1;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
+function buscarUltimoComentario() {
+    console.log("ACESSEI O QUADRO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n")
+    var instrucaoSql = `
+        SELECT conteudo FROM comentario WHERE data_comentario = (SELECT MAX(data_comentario) FROM comentario);
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     listar,
     enviarComentario,
     enviarAvaliacao,
     buscarComentarios,
-    somarVisita
+    somarVisita,
+    buscarDadosKpiQuadros,
+    buscarUsuarioComentario,
+    buscarUltimoComentario
 }
