@@ -78,6 +78,12 @@ body {
     justify-content: center;
     align-items: center;
     font-family: "DM Sans", sans-serif;
+    transition: 0.2s ease;
+}
+
+.login-left-side a:hover {
+    background-color: white;
+    color: var(--dark-green);
 }
 
 .login-right-side {
@@ -113,8 +119,61 @@ body {
     width: 25%;
     height: 10%;
     background-color: var(--dark-green);
-    border: 2px solid white;
+    border: 3px solid var(--dark-green);
     border-radius: 35px;
     font-size: 1.6rem;
     color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+}
+
+.login-right-side button:hover {
+    background-color: transparent;
+    border: 3px solid var(--dark-green);
+    color: var(--dark-green);
+}
+
+#login_alert {
+    display: none;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 20px;
+}
+
+.login_resultado {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 45, 45, 0.938);
+    width: 500px;
+    height: 150px;
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.login_resultado p {
+    font-size: 1.5rem;
+    align-self: center;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.login_resultado span {
+    font-size: 60px;
+    line-height: 30px;
+    cursor: pointer;
+    width: 100%;
+    text-align: end;
 }

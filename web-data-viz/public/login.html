@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="style-login.css">
 </head>
+
 <body>
     <header class="login-cabecalho">
         <span style="font-size: 2.5rem; margin-left: 30px;" class="material-symbols-outlined">
-            <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#ffffff"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></a>
+            <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960"
+                    width="30px" fill="#ffffff">
+                    <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+                </svg></a>
         </span>
     </header>
     <section class="login-container">
@@ -27,43 +32,74 @@
             </div>
         </div>
     </section>
+    <div id="login_alert">
+        <div class="login_resultado">
+            
+        </div>
+    </div>
 </body>
 
 <script>
+    var popup = document.getElementById('login_alert')
+    var popupContent = document.querySelector('.login_resultado')
+
     function autenticar() {
         var nomeDigitado = ipt_nome.value
         var senhaDigitado = ipt_senha.value
 
-        if(nomeDigitado == "" || senhaDigitado == "") {
-            alert('Preencha os campos')
+        if (nomeDigitado == "" || senhaDigitado == "") {
+            mostrarPopupErro('Preencha todos os campos')
         }
-
-        fetch("/usuarios/autenticar", {
-            method: "GET"
-        }).then(function(resposta) {
-            if(resposta.ok) {
-                return resposta.json()
-            }
-            else {
-                alert("Erro ao fazer Login")
-            }
-        }).then(function(dados) {
-            console.log("Usuarios: ", dados)
-
-            dados.forEach(usuario => {
-                console.log("Usuário: ", usuario.nome);
-
-                if (nomeDigitado == usuario.nome && senhaDigitado == usuario.senha) {
-                    localStorage.setItem('usuario', usuario.nome);
-                    localStorage.setItem('senha', usuario.senha);
-                    localStorage.setItem('id', usuario.idusuario);
-                    alert('Login realizado')
-                    window.location = 'dashboard.html'
+        else {
+            fetch("/usuarios/autenticar", {
+                method: "GET"
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    return resposta.json()
                 }
+                else {
+                    alert("Erro ao fazer Login")
+                }
+            }).then(function (dados) {
+                console.log("Usuarios: ", dados)
+
+                dados.forEach(usuario => {
+                    console.log("Usuário: ", usuario.nome);
+
+                    if (nomeDigitado == usuario.nome && senhaDigitado == usuario.senha) {
+                        localStorage.setItem('usuario', usuario.nome);
+                        localStorage.setItem('senha', usuario.senha);
+                        localStorage.setItem('id', usuario.idusuario);
+                        mostrarPopupErro('Login realizado com sucesso!')
+                        setTimeout(function () {
+                            window.location = 'dashboard.html'
+                        }, 2000)
+                    }
+                    else {
+                        mostrarPopupErro('Usuário não encontrado, tente novamente.')
+                    }
+                })
+            }).catch(function (erro) {
+                console.log("Erro: ", erro);
             })
-        }).catch(function(erro) {
-            console.log("Erro: ", erro);
-        })
+        }
+    }
+
+    function mostrarPopupErro(erro) {
+        popupContent.innerHTML = ''
+        popupContent.innerHTML = `<span onclick="fecharPopupErro()">&times;</span>
+                                    <p>ERRO: ${erro}</p>`
+        popup.style.display = 'flex'
+
+        if (erro == 'Login realizado com sucesso!') {
+            popupContent.style.backgroundColor = 'rgba(44, 184, 44, 0.788)'
+            popupContent.innerHTML = `<span onclick="fecharPopupErro()">&times;</span>
+                                    <p>${erro}</p>`
+        }
+    }
+
+    function fecharPopupErro() {
+        popup.style.display = 'none'
     }
 </script>
 

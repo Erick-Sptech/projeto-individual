@@ -51,6 +51,11 @@ header h2 {
 .navbar-itens a {
     color: white;
 }
+
+.nav-item:hover {
+    border-bottom: 2px solid white;
+}
+
 .navbar-itens button {
     height: 30px;
     padding-left: 10px;
@@ -61,10 +66,20 @@ header h2 {
 .button-entrar {
     background-color: transparent;
     border: 2px solid var(--green-dark-theme);
+    transition: 0.2s ease;
+}
+.button-entrar:hover {
+    background-color: var(--green-dark-theme);
 }
 .button-cadastro {
     background-color: var(--green-dark-theme);
     border: 0;
+    border: 2px solid transparent;
+    transition: 0.2s ease;
+}
+.button-cadastro:hover {
+    background-color: transparent;
+    border: 2px solid var(--green-dark-theme);
 }
 
 /* MAIN */

@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="style-login.css">
 </head>
+
 <body>
     <header class="login-cabecalho">
         <span style="font-size: 2.5rem; margin-left: 30px;" class="material-symbols-outlined">
-            <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#1f1f1f"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></a>
+            <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960"
+                    width="30px" fill="#1f1f1f">
+                    <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+                </svg></a>
         </span>
     </header>
     <section class="login-container">
@@ -28,9 +33,17 @@
             </div>
         </div>
     </section>
+    <div id="login_alert">
+        <div class="login_resultado">
+            
+        </div>
+    </div>
 </body>
 
 <script>
+    var popup = document.getElementById('login_alert')
+    var popupContent = document.querySelector('.login_resultado')
+
     function cadastrar() {
         var nomeDigitado = ipt_nome.value
         var emailDigitado = ipt_email.value
@@ -39,35 +52,58 @@
         console.log(nomeDigitado, emailDigitado, senhaDigitado);
 
         if (nomeDigitado == "" || emailDigitado == "" || senhaDigitado == "") {
-            alert('Preencha os campos')
+            mostrarPopupErro('Preencha todos os campos')
             return false
         }
-        
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                nomeServer: nomeDigitado,
-                emailServer: emailDigitado,
-                senhaServer: senhaDigitado
-            }),
-        }).then(function (resposta) {
-            console.log("resposta: ", resposta)
+        else {
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeDigitado,
+                    emailServer: emailDigitado,
+                    senhaServer: senhaDigitado
+                }),
+            }).then(function (resposta) {
+                console.log("resposta: ", resposta)
 
-            if(resposta.ok) {
-                alert('usuario cadastrado')
-                window.location = 'login.html'
-            }
-            else {
-                alert("Erro ao cadastrar")
-            }
-        }).catch(function (resposta) {
-            console.log("Erro: ", resposta);
-        })
+                if (resposta.ok) {
+                    mostrarPopupErro('Cadastro realizado com sucesso!')
+                    setTimeout(function () {
+                        window.location = 'login.html'
+                    }, 2000)
+                }
+                else {
+                    mostrarPopupErro('Já existe um usuário com esse nome ou email, digite novamente!')
+                }
+            }).catch(function (resposta) {
+                console.log("Erro: ", resposta);
+            })
 
-        return false
+            return false
+        }
+    }
+
+
+
+
+    function mostrarPopupErro(erro) {
+        popupContent.innerHTML = ''
+        popupContent.innerHTML = `<span onclick="fecharPopupErro()">&times;</span>
+                                    <p>ERRO: ${erro}</p>`
+        popup.style.display = 'flex'
+
+        if (erro == 'Cadastro realizado com sucesso!') {
+            popupContent.style.backgroundColor = 'rgba(44, 184, 44, 0.788)'
+            popupContent.innerHTML = `<span onclick="fecharPopupErro()">&times;</span>
+                                    <p>${erro}</p>`
+        }
+    }
+
+    function fecharPopupErro() {
+        popup.style.display = 'none'
     }
 </script>
 
