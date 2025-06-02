@@ -56,6 +56,17 @@ insert into quadro (nome, caminhoImagem, caminhoImagemQuadro) values
 select * from avaliacao;
 select * from quadro;
 select * from usuario;
+select * from comentario;
 select u.nome, c.conteudo, c.data_comentario from comentario c inner join usuario u on c.id_usuario = u.idusuario where id_quadro = 1 order by data_comentario desc, idcomentario desc limit 10;
 
+
 update quadro set visitas = visitas + 1 where idquadro = 1;
+
+select q.nome, 
+(select count(*) from avaliacao a where a.fkquadro = q.idquadro and avaliacao = 1) as qtd_likes,
+(select count(*) from comentario c where c.id_quadro = q.idquadro) as qtd_comentarios
+from quadro q;
+
+SELECT u.nome FROM usuario u INNER JOIN comentario c ON c.id_usuario = u.idusuario GROUP BY u.nome ORDER BY count(*) LIMIT 1;
+
+SELECT conteudo FROM comentario WHERE data_comentario = (SELECT MAX(data_comentario) FROM comentario);
