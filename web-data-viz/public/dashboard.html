@@ -1,97 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style-dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style-dashboard.css">
 </head>
+
 <body>
-    <header>
-        <a href="index.html" style="position: absolute; left: 60px;"><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#ffffff"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></a>
-        <h1>DASHBOARD</h1>
-    </header>
-    <section class="main">
-        <div class="side-bar">
-            <a id="tela1_item" onclick="trocarMain(1)" class="tela-ativa">
-                <svg xmlns="http://www.w3.org/2000/svg" height="110px" viewBox="0 -960 960 960" width="110px" fill="#ffffff"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>
-            </a>
-            <a id="tela2_item" onclick="trocarMain(2)">
-                <svg xmlns="http://www.w3.org/2000/svg" height="90px" viewBox="0 -960 960 960" width="90px" fill="#ffffff"><path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/></svg>
-            </a>
-            <a id="tela3_item" style="margin-top: 400px;" onclick="trocarMain(3)">
-                <svg  xmlns="http://www.w3.org/2000/svg" height="90px" viewBox="0 -960 960 960" width="90px" fill="#ffffff"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg>
-            </a>
+  <header>
+    <a href="index.html" style="position: absolute; left: 60px;"><svg xmlns="http://www.w3.org/2000/svg" height="50px"
+        viewBox="0 -960 960 960" width="50px" fill="#ffffff">
+        <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+      </svg></a>
+    <h1>DASHBOARD</h1>
+  </header>
+  <section class="main">
+    <div class="side-bar">
+      <a id="tela1_item" onclick="trocarMain(1)" class="tela-ativa">
+        <svg xmlns="http://www.w3.org/2000/svg" height="110px" viewBox="0 -960 960 960" width="110px" fill="#ffffff">
+          <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
+        </svg>
+      </a>
+      <a id="tela2_item" onclick="trocarMain(2)">
+        <svg xmlns="http://www.w3.org/2000/svg" height="90px" viewBox="0 -960 960 960" width="90px" fill="#ffffff">
+          <path
+            d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" />
+        </svg>
+      </a>
+      <a id="tela3_item" style="margin-top: 400px;" onclick="trocarMain(3)">
+        <svg xmlns="http://www.w3.org/2000/svg" height="90px" viewBox="0 -960 960 960" width="90px" fill="#ffffff">
+          <path
+            d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z" />
+        </svg>
+      </a>
+    </div>
+
+
+    <div class="main-content" id="galeria-select">
+      <a href="galeria.html">ENTRAR NA GALERIA</a>
+      <h1>GALERIA DE ARTE DIGITAL</h1>
+      <h1 class="main-title">GALERIA DE ARTE DIGITAL</h1>
+      <h1>GALERIA DE ARTE DIGITAL</h1>
+    </div>
+
+
+    <div class="main-content" id="dashboard-select">
+      <div class="kpi-container">
+        <div class="kpi">
+          <h3>Quadro com maior nota:</h3>
+          <p id="kpi1"></p>
         </div>
-
-
-        <div class="main-content" id="galeria-select">
-          <a href="galeria.html">ENTRAR NA GALERIA</a>
-            <h1>GALERIA DE ARTE DIGITAL</h1>
-            <h1 class="main-title">GALERIA DE ARTE DIGITAL</h1>
-            <h1>GALERIA DE ARTE DIGITAL</h1>
+        <div class="kpi">
+          <h3>Quadro com mais visitas:</h3>
+          <p id="kpi2"></p>
         </div>
-
-
-        <div class="main-content" id="dashboard-select">
-            <div class="kpi-container">
-                <div class="kpi">
-                  <h3>Quadro com maior nota:</h3>
-                  <p id="kpi1"></p>
-                </div>
-                <div class="kpi">
-                  <h3>Quadro com mais visitas:</h3>
-                  <p id="kpi2"></p>
-                </div>
-                <div class="kpi">
-                    <h3>Usuário com mais comentários:</h3>
-                    <p id="kpi3"></p>
-                </div>
-                <div class="kpi">
-                    <h3>Último comentário:</h3>
-                    <p id="kpi4"></p>
-                </div>
-          </div>
-
-
-            <div id="canva-container">
-                <div class="graficos1">
-                    <canvas id="grafico1"></canvas>
-                </div>
-                <div class="graficos2">
-                    <canvas id="grafico2"></canvas>  
-                </div>
-                <div class="graficos3">
-                    <canvas id="grafico3"></canvas>
-                </div>
-                <div class="graficos4">
-                    <canvas id="grafico4"></canvas>
-                </div>
-            </div>
-
+        <div class="kpi">
+          <h3>Usuário com mais comentários:</h3>
+          <p id="kpi3"></p>
         </div>
-    </section>
+        <div class="kpi">
+          <h3>Último comentário:</h3>
+          <p id="kpi4"></p>
+        </div>
+      </div>
+
+
+      <div id="canva-container">
+        <div class="graficos1">
+          <canvas id="grafico1"></canvas>
+        </div>
+        <div class="graficos2">
+          <canvas id="grafico2"></canvas>
+        </div>
+        <div class="graficos3">
+          <canvas id="grafico3"></canvas>
+        </div>
+        <div class="graficos4">
+          <canvas id="grafico4"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    const grafico1 = document.getElementById('grafico1');
-    const grafico2 = document.getElementById('grafico2');
-    const grafico3 = document.getElementById('grafico3');
-    const grafico4 = document.getElementById('grafico4');
-    var dadosCarregados = []
-    var quadrosLabels = []
-    var quadrosDados = []
-    var usuarioComentarioKpi = ''
-    var ultimoComentarioKpi = ''
-  
+  const grafico1 = document.getElementById('grafico1');
+  const grafico2 = document.getElementById('grafico2');
+  const grafico3 = document.getElementById('grafico3');
+  const grafico4 = document.getElementById('grafico4');
+  var dadosCarregados = []
+  var quadrosLabels = []
+  var quadrosDados = []
+  var rankQtdLikes = []
+  var rankQtdVisitas = []
+  var usuarioComentarioKpi = ''
+  var ultimoComentarioKpi = ''
+
+  async function criarGraficos() {
     new Chart(grafico1, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: [rankQtdLikes[0].nome, rankQtdLikes[1].nome, rankQtdLikes[2].nome, rankQtdLikes[3].nome, rankQtdLikes[4].nome],
         datasets: [{
           label: 'QUANTIDADE DE LIKES POR QUADRO',
-          data: [12, 19, 3],
+          data: [rankQtdLikes[0].qtd_likes, rankQtdLikes[1].qtd_likes, rankQtdLikes[2].qtd_likes, rankQtdLikes[3].qtd_likes, rankQtdLikes[4].qtd_likes],
           borderWidth: 1
         }]
       },
@@ -102,7 +118,7 @@
           y: {
             beginAtZero: true,
             min: 0,
-            max: 50
+            max: rankQtdLikes[0].qtd_likes + 1
           }
         }
       }
@@ -111,11 +127,11 @@
     new Chart(grafico2, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: [rankQtdVisitas[0].nome, rankQtdVisitas[1].nome, rankQtdVisitas[2].nome, rankQtdVisitas[3].nome, rankQtdVisitas[4].nome],
         datasets: [{
           label: 'QUANTIDADE DE VISITAS POR QUADROS',
-          data: [12, 19, 3],
-          backgroundColor: ['#6ce5e8', '#6ce5e8', '#6ce5e8'],
+          data: [rankQtdVisitas[0].visitas, rankQtdVisitas[1].visitas, rankQtdVisitas[2].visitas, rankQtdVisitas[3].visitas, rankQtdVisitas[4].visitas],
+          backgroundColor: ['#6ce5e8', '#6ce5e8', '#6ce5e8', '#6ce5e8', '#6ce5e8'],
           borderWidth: 1
         }]
       },
@@ -172,99 +188,129 @@
         }
       }
     });
+  }
 
-    async function buscarDadosKpiQuadros() {
-        try {
-          const resposta = await fetch('/quadros/buscarDadosKpiQuadros');
-          if (!resposta.ok) throw new Error('Erro ao buscar kpi quadros');
+  async function buscarDadosKpiQuadros() {
+    try {
+      const resposta = await fetch('/quadros/buscarDadosKpiQuadros');
+      if (!resposta.ok) throw new Error('Erro ao buscar kpi quadros');
 
-          dadosCarregados = await resposta.json(); // DADOS DOS QUADRO AQUI
-          console.log('Dados carregados:', dadosCarregados);
-          dadosCarregados.forEach(quadro => {
-          quadrosLabels.push(quadro.nome)
-          quadrosDados.push([quadro.qtd_likes, quadro.qtd_comentarios, quadro.visitas])
-          });
-          console.log('Labels: ', quadrosLabels);
-          console.log('Data: ', quadrosDados);
-          
+      dadosCarregados = await resposta.json(); // DADOS DOS QUADRO AQUI
+      console.log('Dados carregados:', dadosCarregados);
+      dadosCarregados.forEach(quadro => {
+        quadrosLabels.push(quadro.nome)
+        quadrosDados.push([quadro.qtd_likes, quadro.qtd_comentarios, quadro.visitas])
+      });
+      console.log('Labels: ', quadrosLabels);
+      console.log('Data: ', quadrosDados);
 
-        }catch (erro) {
-          console.error("Erro ao buscar quadros:", erro);
-        }
+
+    } catch (erro) {
+      console.error("Erro ao buscar quadros:", erro);
     }
+  }
 
-    function printarDadosKpi() {
-      var maiorNota = [quadrosLabels[0], quadrosDados[0][0]]
-      var maisVisita = [quadrosLabels[0], quadrosDados[0][2]]
-      
-      for(var i = 1; i < quadrosLabels.length; i++) {
-        if (quadrosDados[i][0] > maiorNota[1]) {
-          maiorNota = [quadrosLabels[i], quadrosDados[i][0]]
-        }
-        if (quadrosDados[i][1] > maisVisita[1]) {
-          maisVisita = [quadrosLabels[i], quadrosDados[i][1]]
-        }
+  function printarDadosKpi() {
+    var maiorNota = [quadrosLabels[0], quadrosDados[0][0]]
+    var maisVisita = [quadrosLabels[0], quadrosDados[0][2]]
+
+    for (var i = 1; i < quadrosLabels.length; i++) {
+      if (quadrosDados[i][0] > maiorNota[1]) {
+        maiorNota = [quadrosLabels[i], quadrosDados[i][0]]
       }
-
-      console.log('Quadro com mais notas: ', maiorNota);
-      console.log('Quadro com mais visitas: ', maisVisita);
-      
-      kpi1.innerHTML = maiorNota[0]
-      kpi2.innerHTML = maisVisita[0]
-      kpi3.innerHTML = usuarioComentarioKpi[0].nome
-      kpi4.innerHTML = ultimoComentarioKpi[0].conteudo
-    }
-
-    async function buscarUsuarioComentario() {
-      const resposta = await fetch('/quadros/buscarUsuarioComentario');
-      if (!resposta.ok) throw new Error('Erro ao buscar kpi usuario');
-
-      usuarioComentarioKpi = await resposta.json()
-      console.log(usuarioComentarioKpi);
-    }
-
-    async function buscarUltimoComentario() {
-      const resposta = await fetch('/quadros/buscarUltimoComentario');
-      if (!resposta.ok) throw new Error("Erro ao buscar ultimo comentario");
-      
-      ultimoComentarioKpi = await resposta.json()
-      console.log(ultimoComentarioKpi);
-    }
-
-
-    function trocarMain(tela) {
-      var tela1 = document.getElementById('galeria-select')
-      var tela2 = document.getElementById('dashboard-select')
-      var tela3 = document.getElementById('galeria-select')
-
-      tela1.style.display = 'none'
-      tela2.style.display = 'none'
-      tela3.style.display = 'none'
-
-      tela1_item.classList.remove('tela-ativa')
-      tela2_item.classList.remove('tela-ativa')
-
-      if (tela == 1) {
-        document.getElementById('galeria-select').style.display = 'flex'
-        tela1_item.classList.add('tela-ativa')
-      }
-      else if (tela == 2) {
-        document.getElementById('dashboard-select').style.display = 'flex'
-        tela2_item.classList.add('tela-ativa')
+      if (quadrosDados[i][1] > maisVisita[1]) {
+        maisVisita = [quadrosLabels[i], quadrosDados[i][1]]
       }
     }
 
-    async function carregarKpis() {
-      await buscarDadosKpiQuadros()
-      await buscarUsuarioComentario()
-      await buscarUltimoComentario()
-      printarDadosKpi()
-    }
+    console.log('Quadro com mais notas: ', maiorNota);
+    console.log('Quadro com mais visitas: ', maisVisita);
 
-carregarKpis()
+    kpi1.innerHTML = maiorNota[0]
+    kpi2.innerHTML = maisVisita[0]
+    kpi3.innerHTML = usuarioComentarioKpi[0].nome
+    kpi4.innerHTML = ultimoComentarioKpi[0].conteudo
+  }
 
+  async function buscarUsuarioComentario() {
+    const resposta = await fetch('/quadros/buscarUsuarioComentario');
+    if (!resposta.ok) throw new Error('Erro ao buscar kpi usuario');
 
+    usuarioComentarioKpi = await resposta.json()
+    console.log(usuarioComentarioKpi);
+  }
 
+  async function buscarUltimoComentario() {
+    const resposta = await fetch('/quadros/buscarUltimoComentario');
+    if (!resposta.ok) throw new Error("Erro ao buscar ultimo comentario");
+
+    ultimoComentarioKpi = await resposta.json()
+    console.log(ultimoComentarioKpi);
+  }
+
+  async function ordenarRankLikes() {
+    const resposta = await fetch('/quadros/ordenarRankLikes');
+    if (!resposta.ok) throw new Error("Erro ao buscar quadros ordenados por like")
+
+    rankQtdLikes = await resposta.json()
+    console.log('Rank', rankQtdLikes);
+    console.log('teste ', rankQtdLikes[0].nome);
+
+  }
+
+  async function ordenarRankVisitas() {
+    const resposta = await fetch('/quadros/ordenarRankVisitas');
+    console.log(resposta);
     
-  </script>  
+    if (!resposta.ok) throw new Error("Erro ao buscar quadros ordenados por visitas :P");
+
+    rankQtdVisitas = await resposta.json()
+    console.log('Visitas ', rankQtdVisitas);
+  }
+
+  function trocarMain(tela) {
+    var tela1 = document.getElementById('galeria-select')
+    var tela2 = document.getElementById('dashboard-select')
+    var tela3 = document.getElementById('galeria-select')
+
+    tela1.style.display = 'none'
+    tela2.style.display = 'none'
+    tela3.style.display = 'none'
+
+    tela1_item.classList.remove('tela-ativa')
+    tela2_item.classList.remove('tela-ativa')
+
+    if (tela == 1) {
+      document.getElementById('galeria-select').style.display = 'flex'
+      tela1_item.classList.add('tela-ativa')
+    }
+    else if (tela == 2) {
+      document.getElementById('dashboard-select').style.display = 'flex'
+      tela2_item.classList.add('tela-ativa')
+    }
+  }
+
+  async function carregarKpis() {
+    await buscarDadosKpiQuadros()
+    await buscarUsuarioComentario()
+    await buscarUltimoComentario()
+    printarDadosKpi()
+  }
+
+  async function carregarGraficos() {
+
+    console.log("entrei")
+    await ordenarRankLikes()
+    await ordenarRankVisitas()
+    criarGraficos()
+  }
+
+  carregarKpis()
+  carregarGraficos()
+
+
+
+
+</script>
+
 </html>

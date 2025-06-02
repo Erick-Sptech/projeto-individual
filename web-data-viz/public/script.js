@@ -110,6 +110,10 @@ function iniciarJogo() {
         }
     });
 
+    botao_fechar.onclick = () => {
+        printarPopup()
+    }
+
     document.addEventListener('keyup', function(event) {
             if(event.key == 'ArrowLeft') {
                 esquerda = false

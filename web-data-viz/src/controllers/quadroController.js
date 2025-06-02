@@ -128,6 +128,24 @@ function buscarUltimoComentario(req, res) {
     })
 }
 
+function ordenarRankLikes (req, res) {
+    quadroModel.ordenarRankLikes().then(function(resultado) {
+        res.status(200).json(resultado)
+    }).catch(function(erro) {
+        console.log("Erro Controller: ", erro);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+function ordenarRankVisitas (req, res) {
+    quadroModel.ordenarRankVisitas().then(function(resultado) {
+        res.status(200).json(resultado)
+    }).catch(function(erro) {
+        console.log("Erro Controller: ", erro);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
 module.exports = {
     listar,
     enviarComentario,
@@ -136,5 +154,7 @@ module.exports = {
     somarVisita,
     buscarDadosKpiQuadros,
     buscarUsuarioComentario,
-    buscarUltimoComentario
+    buscarUltimoComentario,
+    ordenarRankLikes,
+    ordenarRankVisitas
 }

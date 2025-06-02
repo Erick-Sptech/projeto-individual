@@ -19,6 +19,14 @@ router.get("/buscarUltimoComentario", function (req, res) {
     quadroController.buscarUltimoComentario(req, res);
 });
 
+router.get("/ordenarRankLikes", function(req, res) {
+    quadroController.ordenarRankLikes(req, res)
+});
+
+router.get("/ordenarRankVisitas", function(req, res) {
+    quadroController.ordenarRankVisitas(req, res)
+});
+
 router.post("/enviarComentario", function (req, res) {
     quadroController.enviarComentario(req, res);
 });
