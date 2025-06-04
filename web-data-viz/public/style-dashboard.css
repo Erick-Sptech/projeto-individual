@@ -16,7 +16,7 @@
 .graficos1 {
     padding: 2.5vw;
     width: 38vw;
-    height: 60vh;
+    height: 56vh;
     box-shadow: rgb(196, 196, 196) 1px 1px 10px 1px;
     border-radius: 10px;
 }
@@ -24,23 +24,7 @@
 .graficos2 {
     padding:2.5vw;
     width: 38vw;
-    height: 60vh;
-    box-shadow: rgb(196, 196, 196) 1px 1px 10px 1px;
-    border-radius: 10px;
-}
-
-.graficos3 {
-    padding:2.5vw;
-    width: 38vw;
-    height: 60vh;
-    box-shadow: rgb(196, 196, 196) 1px 1px 10px 1px;
-    border-radius: 10px;
-}
-
-.graficos4 {
-    padding:2.5vw;
-    width: 38vw;
-    height: 60vh;
+    height: 56vh;
     box-shadow: rgb(196, 196, 196) 1px 1px 10px 1px;
     border-radius: 10px;
 }

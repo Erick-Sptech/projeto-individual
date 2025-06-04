@@ -82,7 +82,7 @@ function buscarUltimoComentario() {
 function ordenarRankLikes() {
     console.log("ACESSEI O QUADRO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n")
     var instrucaoSql = `
-        SELECT q.nome, count(*) qtd_likes FROM quadro q LEFT JOIN comentario c ON c.id_quadro = q.idquadro GROUP BY q.nome ORDER BY qtd_likes DESC LIMIT 5;
+        SELECT q.nome, sum(a.avaliacao) qtd_likes FROM quadro q LEFT JOIN avaliacao a ON a.fkquadro = q.idquadro GROUP BY q.nome ORDER BY qtd_likes DESC LIMIT 5;
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql)

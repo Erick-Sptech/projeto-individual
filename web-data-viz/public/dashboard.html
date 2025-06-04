@@ -29,12 +29,6 @@
             d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" />
         </svg>
       </a>
-      <a id="tela3_item" style="margin-top: 400px;" onclick="trocarMain(3)">
-        <svg xmlns="http://www.w3.org/2000/svg" height="90px" viewBox="0 -960 960 960" width="90px" fill="#ffffff">
-          <path
-            d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z" />
-        </svg>
-      </a>
     </div>
 
 
@@ -74,13 +68,6 @@
         <div class="graficos2">
           <canvas id="grafico2"></canvas>
         </div>
-        <div class="graficos3">
-          <canvas id="grafico3"></canvas>
-        </div>
-        <div class="graficos4">
-          <canvas id="grafico4"></canvas>
-        </div>
-      </div>
 
     </div>
   </section>
@@ -90,8 +77,7 @@
 <script>
   const grafico1 = document.getElementById('grafico1');
   const grafico2 = document.getElementById('grafico2');
-  const grafico3 = document.getElementById('grafico3');
-  const grafico4 = document.getElementById('grafico4');
+
   var dadosCarregados = []
   var quadrosLabels = []
   var quadrosDados = []
@@ -101,6 +87,7 @@
   var ultimoComentarioKpi = ''
 
   async function criarGraficos() {
+    
     new Chart(grafico1, {
       type: 'bar',
       data: {
@@ -118,7 +105,7 @@
           y: {
             beginAtZero: true,
             min: 0,
-            max: rankQtdLikes[0].qtd_likes + 1
+            max: Number(rankQtdLikes[0].qtd_likes) + 1
           }
         }
       }
@@ -133,49 +120,6 @@
           data: [rankQtdVisitas[0].visitas, rankQtdVisitas[1].visitas, rankQtdVisitas[2].visitas, rankQtdVisitas[3].visitas, rankQtdVisitas[4].visitas],
           backgroundColor: ['#6ce5e8', '#6ce5e8', '#6ce5e8', '#6ce5e8', '#6ce5e8'],
           borderWidth: 1
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
-    new Chart(grafico3, {
-      type: 'pie',
-      data: {
-        labels: ['Red', 'Blue'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19],
-          backgroundColor: ['#6ce5e8', '#f1f1f1',],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
-    new Chart(grafico4, {
-      type: 'line',
-      data: {
-        labels: 'teste',
-        datasets: [{
-          label: 'My First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
         }]
       },
       options: {
@@ -228,8 +172,18 @@
 
     kpi1.innerHTML = maiorNota[0]
     kpi2.innerHTML = maisVisita[0]
-    kpi3.innerHTML = usuarioComentarioKpi[0].nome
-    kpi4.innerHTML = ultimoComentarioKpi[0].conteudo
+    if (!usuarioComentarioKpi[0]?.nome) {
+      kpi3.innerHTML = 'Nenhum comentário foi realizado'
+    }
+    else {
+      kpi3.innerHTML = usuarioComentarioKpi[0].nome
+    }
+    if (!ultimoComentarioKpi[0]?.conteudo) {
+      kpi4.innerHTML = 'Nenhum comentário foi realizado'
+    }
+    else {
+      kpi4.innerHTML = ultimoComentarioKpi[0].conteudo
+    }
   }
 
   async function buscarUsuarioComentario() {
@@ -256,6 +210,16 @@
     console.log('Rank', rankQtdLikes);
     console.log('teste ', rankQtdLikes[0].nome);
 
+    rankQtdLikes.forEach(quadro => {
+      if(!quadro?.qtd_likes) {
+        console.log('A qtd de like era: ', quadro.qtd_likes);
+        
+        quadro.qtd_likes = 0
+
+        console.log('Agora e : ', quadro.qtd_likes);
+        
+      }
+    });
   }
 
   async function ordenarRankVisitas() {
