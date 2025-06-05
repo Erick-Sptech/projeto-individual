@@ -14,7 +14,7 @@
         viewBox="0 -960 960 960" width="50px" fill="#ffffff">
         <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
       </svg></a>
-    <h1>DASHBOARD</h1>
+    <h1 id="bemvindo_title"></h1>
   </header>
   <section class="main">
     <div class="side-bar">
@@ -85,6 +85,8 @@
   var rankQtdVisitas = []
   var usuarioComentarioKpi = ''
   var ultimoComentarioKpi = ''
+
+  bemvindo_title.innerHTML = `Bem vindo ${localStorage.getItem('usuario')}!`
 
   async function criarGraficos() {
     

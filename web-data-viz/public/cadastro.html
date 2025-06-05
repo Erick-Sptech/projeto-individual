@@ -55,6 +55,12 @@
             mostrarPopupErro('Preencha todos os campos')
             return false
         }
+        else if(senhaDigitado.length < 6) {
+            mostrarPopupErro('Digite uma senha maior que 5 caracteres')
+        }
+        else if(!emailDigitado.includes('@')) {
+            mostrarPopupErro('Digite um email válido')
+        }
         else {
             fetch("/usuarios/cadastrar", {
                 method: "POST",
