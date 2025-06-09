@@ -43,14 +43,14 @@ create user galeriaUser identified by '1234';
 
 grant all privileges on galeria.* to 'galeriaUser'@'%';
 
-insert into usuario (nome, email, senha) values ('Erick', 'erick@gmail.com', '1234');
+insert into usuario (nome, email, senha) values ('Erick', 'erick@gmail.com', '123456');
 
 insert into quadro (nome, caminhoImagem, caminhoImagemQuadro) values
-	('quadro1', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
-    ('quadro2', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
-    ('quadro3', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
-    ('quadro4', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png'),
-    ('quadro5', 'assets/card_images/card_image1.png', 'assets/card_images/card_ex.png')
+	('quadro1', 'assets/card_images/imagem1.jpg', 'assets/card_images/imagem1-quadro.png'),
+    ('quadro2', 'assets/card_images/imagem2.jpg', 'assets/card_images/imagem2-quadro.png'),
+    ('quadro3', 'assets/card_images/imagem3.jpg', 'assets/card_images/imagem3-quadro.png'),
+    ('quadro4', 'assets/card_images/imagem4.jpg', 'assets/card_images/imagem4-quadro.png'),
+    ('quadro5', 'assets/card_images/imagem5.jpg', 'assets/card_images/imagem5-quadro.png')
 ;
 
 select * from avaliacao;
@@ -58,9 +58,6 @@ select * from quadro;
 select * from usuario;
 select * from comentario;
 select u.nome, c.conteudo, c.data_comentario from comentario c inner join usuario u on c.id_usuario = u.idusuario where id_quadro = 1 order by data_comentario desc, idcomentario desc limit 10;
-
-
-update quadro set visitas = visitas + 1 where idquadro = 1;
 
 select q.nome, 
 (select count(*) from avaliacao a where a.fkquadro = q.idquadro and avaliacao = 1) as qtd_likes,
