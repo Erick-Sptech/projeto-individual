@@ -92,7 +92,7 @@ function iniciarJogo() {
 
     window.onload = main();
 
-    // verifica se usuario apertou direcional direito/esquerdo
+    // verifica se usuario apertou a setinha direita/esquerda, movimenta o personagem
     document.addEventListener('keydown', function(event) {
         console.log('Tecla pressionada:', event.key);
         if (event.key == 'ArrowLeft') {
@@ -147,7 +147,7 @@ function iniciarJogo() {
             output.innerHTML = playerX
         }
     }
-    // requestAnimationFrame executa o jogo em 60 fps
+    // requestAnimationFrame executa o jogo em 60 fps (TAXA DE ATUALIZAÇÃO)
     requestAnimationFrame(gameLoop)
 
     function main() {

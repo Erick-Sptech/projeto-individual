@@ -64,7 +64,7 @@ function buscarDadosKpiQuadros() {
 function buscarUsuarioComentario() {
     console.log("ACESSEI O QUADRO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n")
     var instrucaoSql = `
-        SELECT u.nome FROM usuario u INNER JOIN comentario c ON c.id_usuario = u.idusuario GROUP BY u.nome ORDER BY count(*) LIMIT 1;
+        SELECT u.nome FROM usuario u INNER JOIN comentario c ON c.id_usuario = u.idusuario GROUP BY u.nome ORDER BY count(*) DESC LIMIT 1;
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
